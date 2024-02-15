@@ -20,3 +20,16 @@ export function addProduct(
 
   return [...products, { ...newProduct, quantity: 1 }];
 }
+
+export function removeProduct(products: ProductCartProps[], productId: string) {
+  const updatedProducts = products.map((product) =>
+    product.id === productId
+      ? {
+          ...product,
+          quantity: product.quantity > 1 ? product.quantity - 1 : 0,
+        }
+      : product
+  );
+
+  return updatedProducts.filter((product) => product.quantity > 0);
+}
